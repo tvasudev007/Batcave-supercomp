@@ -6,12 +6,16 @@ import org.springframework.stereotype.Component;
 public class ErrorResponseDTO {
 
 	private String error;
+	
+	public ErrorResponseDTO(){
+		
+	}
 
 	public String getErrorMessage() {
 		return error;
 	}
 
-	public void setErrorMessage(String errorMessage) {
-		this.error = errorMessage;
+	public void setErrorMessage(String error) {
+		this.error = error;
 	}
 }

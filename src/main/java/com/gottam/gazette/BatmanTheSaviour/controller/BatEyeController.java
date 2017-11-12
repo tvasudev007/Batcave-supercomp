@@ -23,7 +23,7 @@ import com.gottam.gazette.BatmanTheSaviour.util.GISUtil;
 @RequestMapping("/")
 public class BatEyeController {
 	
-	private static final String errorMessage ="Desole, Bat Eye Tracker cannot compute this location :( ";
+	private static final String errorMessage ="Desole, Bat Eye Tracker unable to given location !!";
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	private final Geocoder geocoder = new Geocoder();
 
@@ -75,7 +75,9 @@ public class BatEyeController {
 	}
 
 	private Object batEyeWithAddress(String address) {
-
+		
+		// Geocoder : To translate address/location to GPS coords...
+		
 		GeocoderRequest geocoderRequest = new GeocoderRequestBuilder().setAddress(address).setLanguage("en")
 				.getGeocoderRequest();
 		GeocodeResponse geocoderResponse = geocoder.geocode(geocoderRequest);

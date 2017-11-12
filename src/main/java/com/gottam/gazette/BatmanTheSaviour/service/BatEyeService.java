@@ -25,8 +25,10 @@ public class BatEyeService {
 
 	// private List<Monument> targets = ;
 	private static final double R = 6372.8; // In kilometers
-	private static final int MAX_PROBABILITY = 95; // Maximum probability of
-													// attacking a location
+	private static final int MAX_PROBABILITY = 95; // Maximum probability cannot
+													// be more than 95, as
+													// Villains are not 100%
+													// predictable
 
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 
@@ -42,7 +44,7 @@ public class BatEyeService {
 				highRiskTargets.add(new Target(monument.getPlace(), monument.getLocation(), distance));
 			}
 		}
-		// sort by distance
+		// sort the targets by distance with smallest distance first
 		Collections.sort(highRiskTargets, new Comparator<Target>() {
 			@Override
 			public int compare(Target t1, Target t2) {
@@ -50,6 +52,8 @@ public class BatEyeService {
 			}
 		});
 
+		// considering only top two nearest distances from the villian's
+		// location
 		LocationResponseDTO response = new LocationResponseDTO();
 
 		int proababilty = 0;
@@ -60,14 +64,16 @@ public class BatEyeService {
 		if (proababilty > MAX_PROBABILITY) {
 			proababilty = MAX_PROBABILITY;
 		}
-		
+
 		String villian = Fugitives.values()[new Random().nextInt(Fugitives.values().length)].toString();
 		Villain villain = new Villain(villian, new Location(lat, lng));
 
 		List<TargetDTO> responseTargets = new ArrayList<TargetDTO>();
 
-		responseTargets.add(new TargetDTO(highRiskTargets.get(0).getPlace(),proababilty,highRiskTargets.get(0).getLocation()));
-		responseTargets.add(new TargetDTO(highRiskTargets.get(1).getPlace(),100-proababilty,highRiskTargets.get(1).getLocation()));
+		responseTargets.add(
+				new TargetDTO(highRiskTargets.get(0).getPlace(), proababilty, highRiskTargets.get(0).getLocation()));
+		responseTargets.add(new TargetDTO(highRiskTargets.get(1).getPlace(), 100 - proababilty,
+				highRiskTargets.get(1).getLocation()));
 
 		response.setTargets(responseTargets);
 		response.setVillain(villain);
@@ -75,6 +81,7 @@ public class BatEyeService {
 		return response;
 	}
 
+	// Formula to Calculate distance between two coordinates
 	private static double haversine(double lat1, double lon1, double lat2, double lon2) {
 		double dLat = Math.toRadians(lat2 - lat1);
 		double dLon = Math.toRadians(lon2 - lon1);

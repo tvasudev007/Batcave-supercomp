@@ -4,7 +4,13 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-@Component
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+@JsonDeserialize(as = LocationResponseDTO.class)
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class LocationResponseDTO {
 
 	private Villain villain;
@@ -14,8 +20,9 @@ public class LocationResponseDTO {
 	public LocationResponseDTO() {
 
 	}
-
-	public LocationResponseDTO(Villain villain, List<TargetDTO> targets) {
+	
+	@JsonCreator
+	public LocationResponseDTO(@JsonProperty("villain")Villain villain, @JsonProperty("targets")List<TargetDTO> targets) {
 
 		this.villain = villain;
 		this.targets = targets;

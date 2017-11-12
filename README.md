@@ -3,6 +3,8 @@
 
 ## Working with Batcave supercomp in Eclipse/STS
 
+Application is built using Spring Boot
+
 ### prerequisites
 The following items should be installed in your system:
 * Maven 3 (http://www.sonatype.com/books/mvnref-book/reference/installation.html)
@@ -18,7 +20,7 @@ If m2e is not there, just follow the install process here: http://eclipse.org/m2
 
 1) In the command line
 ```
-git clone https://github.com/tvasudev007/BatmanGazzette
+git clone https://github.com/tvasudev007/Batcave-supercomp.git 	
 ```
 2) Inside Eclipse
 ```

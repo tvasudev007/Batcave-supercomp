@@ -1,5 +1,10 @@
 package com.gottam.gazette.BatmanTheSaviour.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+@JsonDeserialize(as = TargetDTO.class)
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class TargetDTO {
 
 	private String place;
