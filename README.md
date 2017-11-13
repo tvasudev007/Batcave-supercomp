@@ -30,4 +30,11 @@ Enter the path and click on Finish.
 & Fianlly, Right click on the project and run as "Run on Server" (TOMCAT)
 
 
+REST APIS:
+
+BASE URL: http://localhost:8080/BatmanTheSaviour/
+
+
+
+
 
